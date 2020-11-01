@@ -29,19 +29,19 @@ J2M.prototype.to_markdown = function(str) {
             return Array(parseInt(level) + 1).join('#') + content;
         })
         // Bold
-        .replace(/\*(\S.*)\*/g, '**$1**')
+        .replace(/(^|[^A-Za-z0-9])\*(\S.*)\*($|[^A-Za-z0-9])/g, '$1**$2**$3')
         // Italic
-        .replace(/\_(\S.*)\_/g, '*$1*')
+        .replace(/(^|[^A-Za-z0-9])\_(.*?)\_($|[^A-Za-z0-9])/g, '$1*$2*$3')
         // Monospaced text
-        .replace(/\{\{([^}]+)\}\}/g, '`$1`')
+        .replace(/(^|[^A-Za-z0-9])\{\{([^}]+)\}\}/g, '$1`$2`')
         // Citations (buggy)
         //.replace(/\?\?((?:.[^?]|[^?].)+)\?\?/g, '<cite>$1</cite>')
         // Inserts
-        .replace(/\+([^+]*)\+/g, '<ins>$1</ins>')
+        .replace(/(^|[^A-Za-z0-9])\+(.*?)\+($|[^A-Za-z0-9])/g, '$1<ins>$2</ins>$3')
         // Superscript
-        .replace(/\^([^^]*)\^/g, '<sup>$1</sup>')
+        .replace(/(^|[^A-Za-z0-9])\^(.*?)\^($|[^A-Za-z0-9])/g, '$1<sup>$2</sup>$3')
         // Subscript
-        .replace(/~([^~]*)~/g, '<sub>$1</sub>')
+        .replace(/(^|[^A-Za-z0-9])~(.*?)~($|[^A-Za-z0-9])/g, '$1<sub>$2</sub>$3')
         // Strikethrough
         .replace(/(\s+)-(\S+.*?\S)-(\s+)/g, '$1~~$2~~$3')
         // Code Block
