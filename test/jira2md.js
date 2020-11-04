@@ -143,4 +143,10 @@ describe('to_markdown', function() {
         var markdown = j2m.to_markdown("A text with{color:blue} blue \n lines {color} is not necessary.");
         markdown.should.eql("A text with blue \n lines  is not necessary.");
     });
+    it('should escape html attributes', function() {
+        var markdown = j2m.to_markdown("<defaultCustomFormula>f18[i]</defaultCustomFormula>**");
+        markdown.should.eql("&lt;defaultCustomFormula&gt;f18[i]&lt;/defaultCustomFormula&gt;**");
+    });
+
+    
 });
