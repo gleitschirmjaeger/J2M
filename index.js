@@ -16,6 +16,8 @@ J2M.prototype.jira_to_html = function(str) {
 
 J2M.prototype.to_markdown = function(str) {
     return str
+        // escape HTML tags
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
         // Ordered Lists
         .replace(/^[ \t]*(\*+)\s+/gm, function(match, stars) {
             return Array(stars.length).join("  ") + '* ';
@@ -49,7 +51,7 @@ J2M.prototype.to_markdown = function(str) {
         // Pre-formatted text
         .replace(/{noformat}/g, '```')
         // Un-named Links
-        .replace(/\[([^|]+?)\]/g, '<$1>')
+        .replace(/(^|[^A-Za-z0-9])\[((?=.{3,})[^|]+)\]($|[^A-Za-z0-9])/g, '$1<$2>$3')
         // Images
         .replace(/!(.+)!/g, '![]($1)')
         // Named Links
@@ -67,7 +69,6 @@ J2M.prototype.to_markdown = function(str) {
         })
         // remove leading-space of table headers and rows
         .replace(/^[ \t]*\|/gm, '|');
-
 };
 
 J2M.prototype.to_jira = function(str) {

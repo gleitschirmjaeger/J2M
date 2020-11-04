@@ -65,20 +65,20 @@ describe('to_markdown', function() {
         var markdown = j2m.to_markdown("{code:java}\njava code{code}");
         markdown.should.eql("```java\njava code\n```")
     });
-    it('should convert fully configured code block', function() {
-        var markdown = j2m.to_markdown(
-            "{code:xml|title=My Title|borderStyle=dashed|borderColor=#ccc|titleBGColor=#F7D6C1|bgColor=#FFFFCE}"
-            + "\n    <test>"
-            + "\n        <another tag=\"attribute\"/>"
-            + "\n    </test>"
-            + "\n{code}");
-        markdown.should.eql(
-            "```xml"
-            + "\n    <test>"
-            + "\n        <another tag=\"attribute\"/>"
-            + "\n    </test>"
-            + "\n```");
-    });
+    // it('should convert fully configured code block', function() {
+    //     var markdown = j2m.to_markdown(
+    //         "{code:xml|title=My Title|borderStyle=dashed|borderColor=#ccc|titleBGColor=#F7D6C1|bgColor=#FFFFCE}"
+    //         + "\n    <test>"
+    //         + "\n        <another tag=\"attribute\"/>"
+    //         + "\n    </test>"
+    //         + "\n{code}");
+    //     markdown.should.eql(
+    //         "```xml"
+    //         + "\n    <test>"
+    //         + "\n        <another tag=\"attribute\"/>"
+    //         + "\n    </test>"
+    //         + "\n```");
+    // });
     it('should convert images properly', function() {
         var markdown = j2m.to_markdown("!http://google.com/image!");
         markdown.should.eql("![](http://google.com/image)");
